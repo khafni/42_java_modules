@@ -1,50 +1,79 @@
 package module00.ex03;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
+
 
 public class Program {
 
-    static int getLowestnum(String s) {
-        String[] nums = s.split("\\s+");
-        int min = Integer.MAX_VALUE;
-        for (String num: nums)
+
+    //store the digit in targeted index
+    static long storeValueAtIndex(long originalValue, int index, int valueDigit) {
+        // 0xf is just 1111
+        // we did move 1111 index * 4 times right and bitwise not it to turn those 4 bits empty and available
+        long clearMask = ~(0xF << (index * 4)); //clear the targeted digit to 0
+        //originalValue & clearMask gives us the original number with specific index 4 bits emptied out
+        //(valueDigit << (index * 4) we just bitshift right index * 4 times so we can put the digit in targeted index
+        return (originalValue & clearMask) | (valueDigit << (index * 4)); 
+    }
+    //extract the digit in targeted index
+    static int extractDigitAtIndex(long originalValue, int index) {
+        originalValue = originalValue >> (index * 4); //bitshift right index * 4 times so we can get the digit in targeted index
+        return (int)(originalValue & 0xF);
+    }
+
+  
+    
+    static void displayWeeksGrade(long minGradeStore, int lastWeek) {
+        int minGrade = 0;
+        for (int i = 0; i < lastWeek; i++) {
+            minGrade = extractDigitAtIndex(minGradeStore, i);
+            System.out.print("Week " + i + " ");
+            for(int j = 0; j < minGrade; j++) {
+                System.out.print("=");
+            }
+            System.out.println(">");
+            
+        }
+    }
+
+    static int getMinGrade(Scanner scanner)
+    {
+        int min = 10;
+        int tmp = 0;
+        for (int i = 0; i < 5; i++)
         {
-            if (Integer.valueOf(num) < min)
-                min = Integer.valueOf(num);
+            tmp = scanner.nextInt();
+            if (tmp < 1 || tmp > 9) {
+                System.err.println("IllegalArgument");
+                scanner.close();
+                System.exit(1); 
+            }
+            if (tmp < min)
+                min = tmp;
         }
         return min;
     }
+
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
         int numberOfMonths = 18;
-        String errMsg = "IllegalArgument";
-        Map<Integer, Integer> weeksGrades = new TreeMap<>();
-
-        for (int i = 1; i <= numberOfMonths; i++) {
-            String input = scanner.nextLine();
-            if (input.equals("42"))
-                break;
-            if (input.equals("Week " + String.valueOf(i)) == false)
+        long minGradeStore = 0;
+        int lastWeek = 0;
+        
+        for (int i = 0; i < numberOfMonths; i++) {
+            if (scanner.next().equals("42"))
             {
-                System.err.println(errMsg);
+                displayWeeksGrade(minGradeStore, lastWeek);
                 System.exit(1);
             }
-            input = scanner.nextLine();
-            int minGrade =  getLowestnum(input);
-            weeksGrades.put(i, minGrade);
-        }
-
-        for (Integer key: weeksGrades.keySet())
-        {
-            System.out.printf("Week %d ", key);
-            int equals = weeksGrades.get(key);
-            for (int i = 0; i < equals; i++)
-                System.out.printf("=");
-            System.out.printf(">\n");
+            if (scanner.nextInt() != lastWeek + 1) {
+                System.err.println("IllegalArgument");
+                scanner.close();
+                System.exit(1);
+            }
+            minGradeStore = storeValueAtIndex(minGradeStore, i, getMinGrade(scanner));
+        lastWeek++;
         }
         scanner.close();
     }
