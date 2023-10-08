@@ -13,7 +13,7 @@ public class Program {
             scanner.close();
             return ;
         }
-        for (int i = 2; i * i  <  num; i++) // if number is not a prime, it must have a divisor less than or equal to its square root
+        for (int i = 2; i * i  <=  num; i++) // if number is not a prime, it must have a divisor less than or equal to its square root
         {
             if (num % i == 0)
             {
@@ -23,7 +23,7 @@ public class Program {
             }
             iter++;
         }
-        System.out.printf("-> false %d\n", iter);
+        System.out.printf("-> true %d\n", iter);
         scanner.close(); 
     }
 }
