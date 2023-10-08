@@ -233,7 +233,6 @@ public class Program {
                 for (int j = 0; j < 5; j++) {
                     if (monthDays[dayOfWeek][j] == 1) {
                         int isPresent = attendanceStore[k][j][i - 1];
-                        // if ()
                         System.out.printf("%9s|", isPresent != 0? isPresent + "": "");
                     }
                 }
