@@ -1,11 +1,20 @@
-//import System.out;
-
 import java.lang.System;
+
 public class Program {
     static int calculate(int number) {
-        if (number == 0)
-            return number;
-        return number % 10 + calculate(number / 10); // 8 + 9 + 5 + 9 + 7 + 4
+        int sum = 0;
+        sum += number % 10;
+        number /= 10;
+        sum += number % 10;
+        number /= 10;
+        sum += number % 10;
+        number /= 10;
+        sum += number % 10;
+        number /= 10;
+        sum += number % 10;
+        number /= 10;
+        sum += number % 10;
+        return sum;
     }
     public static void main(String[] args) {
         int number = 479598;

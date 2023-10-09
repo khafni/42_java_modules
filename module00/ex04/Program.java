@@ -1,4 +1,3 @@
-//main class
 
 import java.util.Scanner;
 
@@ -13,6 +12,8 @@ public class Program {
         for (int i = 0; i <= 11; i++) {
             for (int j = 0; j < 10; j++) {
                 int height = (int)(frequencies[j] * scale);
+                if (height == 0)
+                    continue ;
                 if (i == 11) 
                     System.out.print(" " + characters[j] + "  ");
                 else if (i < 11 && i >= (11 - height))

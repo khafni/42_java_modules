@@ -1,10 +1,7 @@
-package module00.ex05;
-
 import java.util.Scanner;
 
 public class Program {
-
-  
+ 
     static boolean checkIfStudentExist(String studentName, String[] students, int numberOfStudents) {
         for (int i = 0; i < numberOfStudents; i++) {
             if (students[i].equals(studentName))
