@@ -136,8 +136,3 @@ User with id = 1 is added
 ```
 
 These exercises provide a comprehensive introduction to object-oriented programming and collection handling in Java. By completing this module, you should have a solid foundation for building more complex Java applications.
-
-**May the Force be with you!**
-```
-
-You can copy and paste this Markdown content into a README.md file for your Java Module 01 project. Feel free to further customize it to fit your needs.
