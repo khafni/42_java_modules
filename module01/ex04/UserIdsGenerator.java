@@ -3,7 +3,7 @@ public class UserIdsGenerator {
     private int identifier;
 
     private UserIdsGenerator() {
-        identifier = -1;
+        identifier = 0;
     }
 
     public static UserIdsGenerator getInstance() {

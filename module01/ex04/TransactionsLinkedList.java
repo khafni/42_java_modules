@@ -60,6 +60,7 @@ public class TransactionsLinkedList implements TransactionsList {
             throw new TransactionListEmptyException();
         Transaction[] array = new Transaction[size];
         Transaction tmp = head;
+        // System.out.println("size "+ size);
         int i = 0;
         while (tmp != null) {
             array[i] = tmp;

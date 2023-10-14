@@ -20,6 +20,7 @@ public class UsersArrayList implements UsersList {
             users = usersTmp;
         }
         users[numUsers] = user;
+        numUsers++;
 
     }
     @Override
