@@ -7,7 +7,7 @@ public class Program {
         int num = scanner.nextInt();
         int iter = 1;
         if (num <= 1) {
-            System.err.printf(err_msg);
+            System.err.println(err_msg);
             scanner.close();
             return ;
         }

@@ -8,12 +8,14 @@ public class Program {
         // Your histogram printing code goes here (same code as provided earlier)
         int maxFrequency = frequencies[0];
         double scale = 10.0 / maxFrequency;
-
+        if (maxFrequency == 0)
+            return ;
         for (int i = 0; i <= 11; i++) {
             for (int j = 0; j < 10; j++) {
                 int height = (int)(frequencies[j] * scale);
-                if (height == 0)
+                 if ( frequencies[j] == 0)
                     continue ;
+
                 if (i == 11) 
                     System.out.print(" " + characters[j] + "  ");
                 else if (i < 11 && i >= (11 - height))
@@ -28,11 +30,7 @@ public class Program {
                 }
             }
             System.out.print("\n");
-        }  
-       
-       
-
-    
+        }      
     }
 
     public static void main(String[] args) {

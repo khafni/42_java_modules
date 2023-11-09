@@ -72,8 +72,6 @@ public class Similarity {
     } catch(IOException io) {
         System.out.println(io.getMessage());
     }
-    // System.out.println(A);
-    // System.out.println(B);
    }
 
    public void writeSimilarityDict() {
@@ -101,6 +99,8 @@ public class Similarity {
                                  .map(x -> x * x)
                                  .mapToInt(Integer::intValue)
                                 .sum());
+    if (vectorAMaganatude == 0 || vectorBMaganatude == 0)
+        return 0;
     return scalarProduct / (vectorAMaganatude * vectorBMaganatude);
    }
 
