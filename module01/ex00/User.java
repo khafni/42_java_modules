@@ -1,7 +1,7 @@
 class User {
-    int identifier;
-    String name;
-    double balance;
+    private int identifier;
+    private String name;
+    private double balance;
 
     
     public User (int identifier, String name, double balance) {

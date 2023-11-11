@@ -76,8 +76,11 @@ class Transaction {
     }
 
     public void makeTransaction() {
-        sender.setBalance(sender.getBalance() - transferAmount);
-        recipient.setBalance(recipient.getBalance() + transferAmount);
+        if (sender.getBalance() < transferAmount) {
+            throw new IllegalTransactionException("insufficient Sender Balance > failed transfer");
+        }
+        sender.setBalance(sender.getBalance() + transferAmount);
+        recipient.setBalance(recipient.getBalance() - transferAmount);
     }
 
     @Override

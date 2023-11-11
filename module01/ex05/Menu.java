@@ -162,6 +162,11 @@ public class Menu {
         Transaction transaction;
         try {
             userId = inputScanner.nextInt();
+            if (!inputScanner.hasNext()) {
+                System.err.println("invalid input\n");
+                inputScanner.close();
+                return ;
+                }   
             transferId = inputScanner.next();
             transaction = transactionsService.removeTransferById(userId, transferId);
             System.out.printf("Transfer To %s(id = %d) %.2f removed\n",
@@ -177,6 +182,10 @@ public class Menu {
             System.out.println(e.getMessage());
             inputScanner.close();
         }
+        // catch (Exception e) {
+        //     System.out.println(e.getMessage());
+        //     inputScanner.close();
+        // }
     }
 
     private void checkTransferValidity() {
@@ -220,9 +229,6 @@ public class Menu {
             else {
                 System.err.println("wrong input: please insert a correct menu item");
             }
-
-
-
         }
     }
 }

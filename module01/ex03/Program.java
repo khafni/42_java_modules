@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 public class Program {
     public static void main(String[] args) {
 
@@ -6,7 +8,6 @@ public class Program {
         User user2 = new User("alice", 10);
         User user3 = new User("john", 30);
         User user4 = new User("jane", 40);
-        User user5 = new User("joe", 50);
 
         // // 3 of transactions
         Transaction transaction1 = new Transaction(user1, user2, Transaction.TransferCategoryType.CREDIT, 10);
@@ -23,6 +24,12 @@ public class Program {
         for (Transaction transaction : transactions) {
             System.out.println(transaction.toString() + "\n");
         }
+        try {
+            transactionsList.removeById(UUID.randomUUID());
+        } catch (TransactionNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

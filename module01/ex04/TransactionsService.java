@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 public class TransactionsService {
     private UsersList usersList;
     private TransactionsList unpairedTrasanctions;
@@ -7,21 +9,33 @@ public class TransactionsService {
         unpairedTrasanctions = new TransactionsLinkedList();
     }
 
-    public void addUser(String name, int balance) {
+    public User addUser(String name, double balance) {
         User newUser = new User(name, balance);
         usersList.addUser(newUser);
+        return newUser;
+    }
+
+    public User getUserById(int userId) {
+        return usersList.getUserById(userId);
+    }
+
+    public String getUserNameById(int userId) {
+        return usersList.getUserById(userId).getName();
     }
 
     public double getUserBalance(int userId) {
+        // System.out.println("id " + userId);
         User user = usersList.getUserById(userId);
+        // System.out.println("user " );
         return user.getBalance();
+        // return 442.342;
     }
 
     public void performTransfer(int senderId, int recipientId, double transferAmount) {
         User sender = usersList.getUserById(senderId);
         User recipient = usersList.getUserById(recipientId);
         if (sender.getBalance() < transferAmount) {
-            throw new IllegalTransactionException();
+            throw new IllegalTransactionException("insufficient Sender Balance > failed transfer");
         }
         Transaction transaction = new Transaction(recipient, sender, Transaction.TransferCategoryType.DEBIT, transferAmount);
         transaction.makeTransaction();
@@ -33,7 +47,19 @@ public class TransactionsService {
         return user.geTransactionsList().toArray();
     }
 
+    public Transaction[] retrieveTransactionsByUserById(int id) {
+        return usersList.getUserById(id).geTransactionsList().toArray();
+    }
+
     public Transaction[] checkTransferValidity() {
         return unpairedTrasanctions.toArray();
     }
+
+    public Transaction removeTransferById(int userId, String uuid) {
+        User user = usersList.getUserById(userId);
+        Transaction transaction = user.geTransactionsList().getTransactionById(UUID.fromString(uuid));
+        unpairedTrasanctions.add(transaction);
+        return transaction;
+    }
+
 }

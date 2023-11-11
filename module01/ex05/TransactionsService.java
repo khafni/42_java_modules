@@ -24,8 +24,11 @@ public class TransactionsService {
     }
 
     public double getUserBalance(int userId) {
+        // System.out.println("id " + userId);
         User user = usersList.getUserById(userId);
+        // System.out.println("user " );
         return user.getBalance();
+        // return 442.342;
     }
 
     public void performTransfer(int senderId, int recipientId, double transferAmount) {
@@ -50,7 +53,13 @@ public class TransactionsService {
     }
 
     public Transaction[] checkTransferValidity() {
-        return unpairedTrasanctions.toArray();
+        try {
+            Transaction[] transactions = unpairedTrasanctions.toArray();
+            return transactions;
+        } catch (TransactionListEmptyException e) {
+            System.out.println(e.getMessage());
+            return new Transaction[0];
+        }
     }
 
     public Transaction removeTransferById(int userId, String uuid) {

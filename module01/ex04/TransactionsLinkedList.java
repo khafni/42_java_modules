@@ -69,5 +69,16 @@ public class TransactionsLinkedList implements TransactionsList {
         }
         return array;
     }
+    @Override
+    public Transaction getTransactionById(UUID id) {
+         Transaction tmp = head;       
+         while (tmp != null)
+         {
+            if (tmp.getIdentifier().equals(id))
+                return tmp;
+            tmp = tmp.getNext();
+         }
+         return null;
+    }
 
 }
