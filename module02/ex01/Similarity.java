@@ -43,6 +43,7 @@ public class Similarity {
         }
     } catch (IOException io) {
         System.out.println(io.getMessage());
+        System.exit(1);
     }
 }
 
