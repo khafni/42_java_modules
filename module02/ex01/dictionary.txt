@@ -1,6 +1,4 @@
 a
 aaa
-bb
 bba
 ccc
-xxx
