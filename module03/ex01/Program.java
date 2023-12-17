@@ -10,19 +10,11 @@ public class Program {
     
         Program.count = Integer.parseInt(args[0].split("=")[1]);
         Runnable r1 = new EggRunnable();
+        Runnable r2 = new HenRunnable();
         Thread t1 = new Thread(r1, "T1");
-        Thread t2 = new HenThread();
+        Thread t2 = new Thread(r2, "T2");
 
         t1.start();
         t2.start();
-        try  {
-            t1.join();
-            t2.join();
-        } catch (InterruptedException ie) {
-            System.err.println(ie.getMessage());
-        }
-        for (int i = 0; i < Program.count; i++) {
-         System.out.println("Human");
-      }
     }
 }
