@@ -10,6 +10,13 @@ public class Program {
     static int threadCount;
 
     public static void main (String[] args) {
+        if (args.length < 1)
+        {
+            System.err.println("wrong usage of the program:");
+            System.err.println("examle:");
+            System.err.println("java Program  --threadsCount=[number]");
+            return;
+        }
         threadCount = Integer.parseInt(args[0].split("=")[1]);
         ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
 //        for (int i = 0; i < threadCount; i++) {
@@ -22,8 +29,8 @@ public class Program {
             while ((line = bufferedReader.readLine()) != null)
             {
 //               System.out.println(line);
-               executorService.execute(new DownloadFileRunnable(i, line));
-               i++;
+                executorService.execute(new DownloadFileRunnable(i, line));
+                i++;
             }
         }
         catch (IOException e)

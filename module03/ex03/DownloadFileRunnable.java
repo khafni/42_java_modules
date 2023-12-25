@@ -1,38 +1,39 @@
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 
 public class DownloadFileRunnable implements Runnable{
     int number;
     String urlString;
     public DownloadFileRunnable (int number, String urlString) {
-       this.number = number;
-       this.urlString = urlString;
+        this.number = number;
+        this.urlString = urlString;
     }
 
-//    private
+    //    private
     @Override
     public void run() {
-        URL url = null;
+        URI uri = null;
         HttpURLConnection httpURLConnection = null;
         try {
-            url = new URL(urlString);
+            uri = new URI(urlString);
+            URL url = uri.toURL();
             httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
             int responseCode = httpURLConnection.getResponseCode();
+
             if (responseCode == HttpURLConnection.HTTP_MOVED_PERM || responseCode == HttpURLConnection.HTTP_MOVED_TEMP) {
-                url = new URL(httpURLConnection.getHeaderField("Location"));
+
+                uri = new URI(httpURLConnection.getHeaderField("Location"));
+                url = uri.toURL();
                 httpURLConnection = (HttpURLConnection) url.openConnection();
             }
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.err.println(e.getMessage());
         }
-
         try (BufferedInputStream bufferedInputStream = new BufferedInputStream(httpURLConnection.getInputStream());
         ) {
             System.out.println(Thread.currentThread().getName() + " start download file number " + number);
-            String fileName = new URL(urlString).getPath();
+            String fileName = new URI(urlString).getPath();
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
             FileOutputStream fos = new FileOutputStream("./" + fileName);
             byte[] buffer = new byte[40000];
@@ -42,7 +43,7 @@ public class DownloadFileRunnable implements Runnable{
                 fos.write(buffer, 0, bytesRead);
             }
         }
-        catch (IOException  e) {
+        catch (IOException | URISyntaxException e) {
             System.err.println("url: " + urlString + " is invalid");
         }
         System.out.println(Thread.currentThread().getName() + " finish download file number " + number);
