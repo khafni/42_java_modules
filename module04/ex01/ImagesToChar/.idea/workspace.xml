@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4648089-a3da-46f0-87ac-e86d1943b5a8" name="Changes" comment="" />
+    <list default="true" id="a4648089-a3da-46f0-87ac-e86d1943b5a8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/manifest.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/resources/image.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ex00/ImagesToChar/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ex00/ImagesToChar/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
@@ -27,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/khalil/Desktop/42_java_modules/module04/ex00/ImagesToChar",
+    "last_opened_file_path": "/Users/khalil/Desktop/42_java_modules/module04/ex01/ImagesToChar/target/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -42,9 +53,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/target/resources" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/resources" />
       <recent name="$PROJECT_DIR$/src/java/fr/42/printer" />
       <recent name="$PROJECT_DIR$/src/java/fr/42/printer/app" />
       <recent name="$PROJECT_DIR$/src/java/fr.42.printer" />
@@ -60,6 +73,7 @@
       <updated>1703624305516</updated>
       <workItem from="1703624306519" duration="2357000" />
       <workItem from="1703636105386" duration="17744000" />
+      <workItem from="1703790560075" duration="11633000" />
     </task>
     <servers />
   </component>
