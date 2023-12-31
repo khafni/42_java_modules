@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4648089-a3da-46f0-87ac-e86d1943b5a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ImagesToChar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ImagesToChar.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/fr/_42/printer/app/Arguments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/fr/_42/printer/app/Arguments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/fr/_42/printer/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/fr/_42/printer/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/image.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/images-to-chars-printer.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/images-to-chars-printer.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/resources/image.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/target/resources/image.bmp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +74,7 @@
       <workItem from="1703624306519" duration="2357000" />
       <workItem from="1703636105386" duration="17744000" />
       <workItem from="1703811559770" duration="22172000" />
-      <workItem from="1704042986916" duration="200000" />
+      <workItem from="1704042986916" duration="1580000" />
     </task>
     <servers />
   </component>
