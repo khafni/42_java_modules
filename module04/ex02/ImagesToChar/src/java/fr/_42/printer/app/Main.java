@@ -12,6 +12,7 @@ public class Main {
         JCommander jCommander = JCommander.newBuilder().addObject(arguments)
                 .build();
         jCommander.parse(args);
+
         ColoredPrinter cp = new ColoredPrinter.Builder(1, false)
                 .foreground(Ansi.FColor.valueOf(arguments.getBlackColor().toUpperCase()))
                 .background(Ansi.BColor.valueOf(arguments.getWhiteColor().toUpperCase()))
