@@ -21,7 +21,7 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
 
     @Override
     public Optional<Message> findById(Long id) {
-        try (Connection conn = dataSource.getConnection(); var ps = conn.prepareStatement("""
+        try (Connection conn = dataSource.getConnection(); var ps = conn.prepareStatement(""" 
                                                             SELECT
                                                             message.id AS message_id,
                                                             "User".id AS author_id,
@@ -33,14 +33,17 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
                                                             date_time AS message_date_time
                                                             FROM message
                                                             JOIN "User" ON message.author = "User".id
-                                                            JOIN chatroom ON message.room = chatroom.id;
+                                                            JOIN chatroom ON message.room = chatroom.id
+                                                            WHERE message.id = ?
                 """)) {
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 Message message = new Message();
                 User user = new User();
                 Chatroom chatroom = new Chatroom();
                 message.setId(rs.getInt("message_id"));
+
                 user.setId(rs.getInt("author_id"));
                 user.setLogin(rs.getString("author_login"));
                 user.setPassword(rs.getString("author_password"));

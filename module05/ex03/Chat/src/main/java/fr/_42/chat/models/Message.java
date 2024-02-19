@@ -1,20 +1,31 @@
 package fr._42.chat.models;
 
-import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Message {
-    private int id;
+    private Long id;
     private User author;
-    private Chatroom room;
+    private Room room;
     private String text;
-    private Timestamp date;
+    private LocalDateTime date;
 
-    public int getId() {
+    public Message() {
+    }
+
+    public Message(Long id, User author, Room room, String text, LocalDateTime date) {
+        this.id = id;
+        this.author = author;
+        this.room = room;
+        this.text = text;
+        this.date = date;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -26,11 +37,11 @@ public class Message {
         this.author = author;
     }
 
-    public Chatroom getRoom() {
+    public Room getRoom() {
         return room;
     }
 
-    public void setRoom(Chatroom room) {
+    public void setRoom(Room room) {
         this.room = room;
     }
 
@@ -42,11 +53,11 @@ public class Message {
         this.text = text;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -56,7 +67,7 @@ public class Message {
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Message m)) return false;
-        return id == m.id && author == m.author && room == m.room && text == m.text && date == m.date;
+        return id == m.id && author == m.author && room == m.room && text.equals(m.text) && date == m.date;
     }
 
     @Override
