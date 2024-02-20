@@ -5,6 +5,7 @@ import fr._42.chat.models.User;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +43,17 @@ public class UserRepositoryJdbcImpl implements UserRepository {
                                Order By u_id;
                  """)) {
             Map<Integer, User> userMap = new HashMap<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Long userId = rs.getLong("u_id");
+                String userLogin = rs.getString("u_login");
+                String userPassword = rs.getString("u_password");
 
+
+                userMap.computeIfAbsent(userId.intValue(), id -> new User(userId, userLogin, userPassword, null, null));
+            }
         } catch (SQLException sqlException) {
-
+            System.err.println(sqlException.getMessage());
         }
         return List.of(new User());
     }

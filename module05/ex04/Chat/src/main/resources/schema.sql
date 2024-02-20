@@ -1,8 +1,3 @@
--- CREATE TABLE Message(
---     id SERIAL PRIMARY KEY,
---     author varchar(50) not null,
---     room
--- )
 CREATE TABLE "User" (
     id SERIAL PRIMARY KEY,
     login varchar(50) not null,
