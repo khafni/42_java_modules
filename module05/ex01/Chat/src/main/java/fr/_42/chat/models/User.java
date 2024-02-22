@@ -1,7 +1,6 @@
 package fr._42.chat.models;
 
 import java.util.List;
-import java.util.Objects;
 
 public class User {
     private int id;

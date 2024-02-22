@@ -1,4 +1,4 @@
-package main.java.fr._42.chat.models;
+package fr._42.chat.models;
 
 import java.util.Date;
 

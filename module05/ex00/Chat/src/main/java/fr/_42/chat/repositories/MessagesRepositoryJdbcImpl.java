@@ -1,6 +1,6 @@
-package main.java.fr._42.chat.repositories;
+package fr._42.chat.repositories;
 
-import main.java.fr._42.chat.models.Message;
+import fr._42.chat.models.Message;
 
 import java.util.Optional;
 

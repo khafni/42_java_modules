@@ -73,9 +73,9 @@ public class Room {
 
     @Override
     public String toString() {
-        return "{id=" + id
+        return "\n{id=" + id
                 + ",name=\"" + name
                 + "\",creator=\"" + owner
-                + "\",messages=" + messages + "}";
+                + "\",messages=" + messages + "}\n";
     }
 }

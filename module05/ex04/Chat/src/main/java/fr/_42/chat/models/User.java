@@ -89,10 +89,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "{id=" + id
-                + ",login=\"" + login
-                + "\",password=\"" + password
-                + "\",createdRooms=" + createdRooms
-                + "\",rooms=" + rooms + "}";
+        return "User = {" +
+                "id=" + id +
+                ", login=\"" + login + "\"" +
+                ", password=\"" + password + "\"" +
+                ",\ncreatedRooms=\n" + createdRooms +
+                ",\nrooms user is part of=\n" + rooms +
+                "}\n";
     }
 }

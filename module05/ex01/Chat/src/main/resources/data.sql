@@ -26,7 +26,6 @@ VALUES
 ('UK DRILL', 4),
 ('TEA PALACE', 5);
 
-
 INSERT INTO Message (author, room, text, date_time)
 VALUES
 (1, 1, 'Hello from jake in The Oranges room', CURRENT_TIMESTAMP),
@@ -34,3 +33,19 @@ VALUES
 (3, 3, 'Greetings from pizzaboi in potato chips', CURRENT_TIMESTAMP),
 (4, 4, 'Salutations from skyboi in UK DRILL', CURRENT_TIMESTAMP),
 (5, 5, 'Welcome from freshboi in TEA PALACE', CURRENT_TIMESTAMP);
+
+INSERT INTO UserChatRoom (UserId, ChatRoom)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5);
+
+INSERT INTO UserChatRoom (UserId, ChatRoom)
+VALUES
+    (1, 4),
+    (2, 5),
+    (3, 1),
+    (4, 3),
+    (5, 2);

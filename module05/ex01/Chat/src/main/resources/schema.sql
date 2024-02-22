@@ -1,8 +1,3 @@
--- CREATE TABLE Message(
---     id SERIAL PRIMARY KEY,
---     author varchar(50) not null,
---     room
--- )
 CREATE TABLE "User" (
     id SERIAL PRIMARY KEY,
     login varchar(50) not null,
@@ -13,6 +8,12 @@ CREATE TABLE Chatroom (
    id  SERIAL PRIMARY KEY,
    name varchar(50) not null,
    owner SERIAL REFERENCES "User"(id)
+);
+
+CREATE TABLE UserChatRoom (
+    id SERIAL PRIMARY KEY,
+    UserId SERIAL REFERENCES "User"(id),
+    ChatRoom SERIAL REFERENCES Chatroom(id)
 );
 
 CREATE TABLE Message (
