@@ -13,6 +13,8 @@ public class Program {
         HikariConfig config = new HikariConfig();
         HikariDataSource ds;
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
+        config.setUsername("postgres");
+        config.setPassword("1234");
         ds = new HikariDataSource(config);
 
         MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(ds);

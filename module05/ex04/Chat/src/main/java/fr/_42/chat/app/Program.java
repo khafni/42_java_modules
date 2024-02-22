@@ -12,6 +12,8 @@ public class Program {
         HikariConfig config = new HikariConfig();
         HikariDataSource ds;
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
+        config.setUsername("postgres");
+        config.setPassword("1234");
         ds = new HikariDataSource(config);
         UserRepository userRepository = new UserRepositoryJdbcImpl(ds);
         List<User> userList = userRepository.findAll(0, 2);
