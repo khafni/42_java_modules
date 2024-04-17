@@ -1,9 +1,12 @@
 package fr._42.numbers;
+import fr._42.numbers.IllegalNumberException;
+import fr._42.numbers.NumberWorker;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class NumberWorkerTest {
 
@@ -49,10 +52,10 @@ class NumberWorkerTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/data.csv")
-    void isDigitsSumCorrect(int num, int sum) {
+    void isDigitsSumCorrect(String num, String sum) {
         NumberWorker numberWorker = new NumberWorker();
         assertTrue(() -> {
-            return numberWorker.digitsSum(num) == sum;
+            return numberWorker.digitsSum(Integer.parseInt(num)) == Integer.parseInt(sum);
         });
     }
 
