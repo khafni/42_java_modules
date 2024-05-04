@@ -27,7 +27,7 @@ public class UsersServiceImplTest {
     void isAuthenticateMethodCorrectForIncorrectLogin() {
         UsersRepository mockRepository = mock(UsersRepository.class);
         UsersServiceImpl usersService = new UsersServiceImpl(mockRepository);
-        when(mockRepository.findByLogin("user1")).thenReturn(null);
+        when(mockRepository.findByLogin(anyString())).thenReturn(null);
         assertFalse(usersService.authenticate(CORRECT_USER.getLogin(), CORRECT_USER.getPassword()));
     }
 
