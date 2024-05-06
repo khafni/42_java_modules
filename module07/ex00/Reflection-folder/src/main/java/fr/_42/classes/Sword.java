@@ -14,14 +14,14 @@ public class Sword {
         this.attackDamage = attackDamage;
     }
 
+    public void swing() {
+        System.out.println(name + " swings with " + attackDamage + " attack damage!");
+    }
+
     // toString() method
     @Override
     public String toString() {
         return "Sword{name='" + name + "', attackDamage=" + attackDamage + "}";
     }
 
-    // Method to print a message when swinging the sword
-    public void swing() {
-        System.out.println(name + " swings with " + attackDamage + " attack damage!");
-    }
 }

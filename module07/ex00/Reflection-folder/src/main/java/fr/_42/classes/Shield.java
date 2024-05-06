@@ -20,6 +20,6 @@ public class Shield {
     }
 
     public void blockAttack() {
-        System.out.println(name + " blocks an attack, reducing damage by " + defenseValue + " points!");
+        System.out.println(name + " blocks an attack, reducing damage by "  + defenseValue + " points!");
     }
 }
