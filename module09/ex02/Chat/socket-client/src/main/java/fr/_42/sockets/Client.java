@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Client {
     public static void main(String[] args) {
@@ -57,20 +58,30 @@ public class Client {
             }
             System.out.println(authResult.getMessage());
 
-            Thread readerThread = startReaderThread(mapper, in);
+            // Server closes the connection right after a sign-up; ask the user to reconnect for sign-in.
+            if ("signUp".equalsIgnoreCase(authChoice)) {
+                System.out.println("Please restart the client and sign in to start chatting.");
+                return;
+            }
 
-            while (true) {
+            AtomicBoolean connected = new AtomicBoolean(true);
+            Thread readerThread = startReaderThread(mapper, in, connected);
+
+            while (connected.get()) {
                 String userInput = prompt(scanner, "> ");
+                String normalized = userInput == null ? "" : userInput.trim();
 
-                if (userInput.startsWith("/create ")) {
-                    sendCommand(out, mapper, new ClientCommand("/create", null, null, userInput.substring(8).trim(), null));
-                } else if (userInput.startsWith("/join ")) {
-                    sendCommand(out, mapper, new ClientCommand("/join", null, null, userInput.substring(6).trim(), null));
-                } else if ("/rooms".equalsIgnoreCase(userInput)) {
+                if (normalized.isEmpty()) {
+                    continue;
+                } else if (normalized.startsWith("/create ")) {
+                    sendCommand(out, mapper, new ClientCommand("/create", null, null, normalized.substring(8).trim(), null));
+                } else if (normalized.startsWith("/join ")) {
+                    sendCommand(out, mapper, new ClientCommand("/join", null, null, normalized.substring(6).trim(), null));
+                } else if ("/rooms".equalsIgnoreCase(normalized)) {
                     sendCommand(out, mapper, new ClientCommand("/rooms", null, null, null, null));
-                } else if ("/leave".equalsIgnoreCase(userInput)) {
+                } else if ("/leave".equalsIgnoreCase(normalized)) {
                     sendCommand(out, mapper, new ClientCommand("/leave", null, null, null, null));
-                } else if ("Exit".equalsIgnoreCase(userInput)) {
+                } else if ("exit".equalsIgnoreCase(normalized) || "/exit".equalsIgnoreCase(normalized) || "quit".equalsIgnoreCase(normalized)) {
                     sendCommand(out, mapper, new ClientCommand("Exit", null, null, null, null));
                     break;
                 } else {
@@ -90,7 +101,7 @@ public class Client {
         }
     }
 
-    private static Thread startReaderThread(ObjectMapper mapper, BufferedReader in) {
+    private static Thread startReaderThread(ObjectMapper mapper, BufferedReader in, AtomicBoolean connected) {
         Thread readerThread = new Thread(() -> {
             try {
                 String line;
@@ -114,7 +125,9 @@ public class Client {
                     }
                 }
             } catch (IOException e) {
-                // Connection closed or JSON parsing error
+                System.out.println("Connection closed: " + e.getMessage());
+            } finally {
+                connected.set(false);
             }
         });
         readerThread.setDaemon(true);
@@ -132,6 +145,9 @@ public class Client {
 
     private static void sendCommand(PrintWriter out, ObjectMapper mapper, ClientCommand command) throws IOException {
         out.println(mapper.writeValueAsString(command));
+        if (out.checkError()) {
+            throw new IOException("Failed to send command to server.");
+        }
     }
 
     private static String prompt(Scanner scanner, String label) {
