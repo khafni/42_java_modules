@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Client {
     public static void main(String[] args) {
         int serverPort = 8081;
+        String serverHost = "localhost";
 
         for (String arg : args) {
             if (arg.startsWith("--server-port=")) {
@@ -25,13 +26,20 @@ public class Client {
                     System.err.println("Invalid port number: " + arg);
                     System.exit(1);
                 }
+            } else if (arg.startsWith("--server-host=")) {
+                String value = arg.substring("--server-host=".length()).trim();
+                if (value.isEmpty()) {
+                    System.err.println("Server host cannot be empty.");
+                    System.exit(1);
+                }
+                serverHost = value;
             }
         }
 
         ObjectMapper mapper = new ObjectMapper();
 
         try (
-            Socket socket = new Socket("localhost", serverPort);
+            Socket socket = new Socket(serverHost, serverPort);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             Scanner scanner = new Scanner(System.in)
