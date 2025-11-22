@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +95,7 @@ public class MessagesRepositoryImpl implements MessagesRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
             ps.setLong(1, entity.getSender().getId());
             ps.setLong(2, entity.getChatroom().getId());
             ps.setString(3, entity.getText());

@@ -21,23 +21,24 @@ public class UsersRepositoryImpl implements UsersRepository {
     private final JdbcTemplate jdbcTemplate;
     private final ChatroomRepository chatroomRepository;
 
-    private final RowMapper<User> userRowMapper = (rs, rowNum) -> {
-        User user = new User();
-        user.setId(rs.getLong("id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password"));
-
-        Long lastChatroomId = rs.getLong("last_chatroom_id");
-        if (!rs.wasNull()) {
-            chatroomRepository.findById(lastChatroomId).ifPresent(user::setLastChatroom);
-        }
-        return user;
-    };
+    private final RowMapper<User> userRowMapper;
 
     @Autowired
     public UsersRepositoryImpl(JdbcTemplate jdbcTemplate, ChatroomRepository chatroomRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.chatroomRepository = chatroomRepository;
+        this.userRowMapper = (rs, rowNum) -> {
+            User user = new User();
+            user.setId(rs.getLong("id"));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+
+            Long lastChatroomId = rs.getLong("last_chatroom_id");
+            if (!rs.wasNull()) {
+                this.chatroomRepository.findById(lastChatroomId).ifPresent(user::setLastChatroom);
+            }
+            return user;
+        };
     }
 
     @Override

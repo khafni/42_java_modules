@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +69,8 @@ public class ChatroomRepositoryImpl implements ChatroomRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // Restrict generated keys to the ID column to avoid multi-column key maps
+            PreparedStatement ps = connection.prepareStatement(sql, new String[]{"id"});
             ps.setString(1, entity.getName());
             return ps;
         }, keyHolder);
