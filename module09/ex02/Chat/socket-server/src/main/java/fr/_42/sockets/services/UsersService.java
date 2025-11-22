@@ -1,0 +1,12 @@
+package fr._42.sockets.services;
+
+import fr._42.sockets.models.Chatroom;
+import fr._42.sockets.models.User;
+
+import java.util.Optional;
+
+public interface UsersService {
+    void signUp(String username, String password) throws Exception;
+    Optional<User> signIn(String username, String password);
+    void updateLastChatroom(User user, Chatroom chatroom);
+}
