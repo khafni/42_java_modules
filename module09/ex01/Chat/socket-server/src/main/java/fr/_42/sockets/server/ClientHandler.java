@@ -120,6 +120,14 @@ public class ClientHandler implements Runnable {
     }
 
     public void broadcastMessage(String message) {
+        synchronized (connectedClients) {
+            for (ClientHandler client : connectedClients) {
+                client.sendMessage(message);
+            }
+        }
+    }
+
+    private void sendMessage(String message) {
         if (out != null) {
             out.println(message);
         }
